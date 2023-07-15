@@ -4,8 +4,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class MinjikimIssusServiceApplication
+class IssusServiceApplication
 
 fun main(args: Array<String>) {
-	runApplication<MinjikimIssusServiceApplication>(*args)
+	runApplication<IssusServiceApplication>(*args)
 }
