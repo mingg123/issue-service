@@ -2,6 +2,7 @@ package com.issusService.service
 
 import com.issusService.domain.Issus
 import com.issusService.domain.IssusRepository
+import com.issusService.domain.enums.IssusStatus
 import com.issusService.model.IssusRequest
 import com.issusService.model.IssusResponse
 import org.springframework.stereotype.Service
@@ -22,4 +23,11 @@ class IssusService(private val issusRepository: IssusRepository) {
         )
         return IssusResponse(issusRepository.save(issus))
     }
+
+    @Transactional
+    fun getAll(status: IssusStatus) =
+            issusRepository.findAllByStatusOrderByCreatedAtDesc(status)
+                    ?.map {IssusResponse(it)}
+
+
 }
