@@ -1,28 +1,28 @@
 package com.issusService.model
 
 import com.fasterxml.jackson.annotation.JsonFormat
-import com.issusService.domain.Issus
-import com.issusService.domain.enums.IssusPriority
-import com.issusService.domain.enums.IssusStatus
-import com.issusService.domain.enums.IssusType
+import com.issusService.domain.Issue
+import com.issusService.domain.enums.IssuePriority
+import com.issusService.domain.enums.IssueStatus
+import com.issusService.domain.enums.IssueType
 import java.time.LocalDateTime
 
-data class IssusResponse(
+data class IssueResponse(
         val id: Long,
         val summary: String,
         val description: String,
         val userId: Long,
-        val type: IssusType,
-        val status: IssusStatus,
-        val priority: IssusPriority,
+        val type: IssueType,
+        val status: IssueStatus,
+        val priority: IssuePriority,
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         val createdAt: LocalDateTime?,
         @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
         val updatedAt: LocalDateTime?,
 ) {
     companion object {
-        operator fun invoke(issus: Issus) = with(issus) {
-            IssusResponse(
+        operator fun invoke(issue: Issue) = with(issue) {
+            IssueResponse(
                     id = id!!,
                     summary = summary,
                     description = description,

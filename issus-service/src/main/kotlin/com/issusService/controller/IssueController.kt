@@ -1,9 +1,9 @@
 package com.issusService.controller
 
 import com.issusService.config.AuthUser
-import com.issusService.domain.enums.IssusStatus
-import com.issusService.model.IssusRequest
-import com.issusService.service.IssusService
+import com.issusService.domain.enums.IssueStatus
+import com.issusService.model.IssueRequest
+import com.issusService.service.IssueService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -17,38 +17,38 @@ import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/api/v1/issus")
-class IssusController(private val issusService: IssusService) {
+@RequestMapping("/api/v1/issue")
+class IssueController(private val issueService: IssueService) {
 
     @PostMapping
     fun create(
-        authUser: AuthUser,
-        @RequestBody request: IssusRequest,
-    ) = issusService.create(authUser.userId, request)
+            authUser: AuthUser,
+            @RequestBody request: IssueRequest,
+    ) = issueService.create(authUser.userId, request)
 
     @GetMapping
     fun getAll(
             authUser: AuthUser,
-            @RequestParam(required = false, defaultValue = "TODO") status: IssusStatus,
-    ) = issusService.getAll(status)
+            @RequestParam(required = false, defaultValue = "TODO") status: IssueStatus,
+    ) = issueService.getAll(status)
 
     @GetMapping("/{id}")
     fun getDetail(
             authUser: AuthUser,
             @PathVariable id: Long
-    ) = issusService.get(id);
+    ) = issueService.get(id);
 
     @PutMapping("/{id}")
     fun edit(
             authUser: AuthUser,
             @PathVariable id: Long,
-            @RequestBody issusRequest: IssusRequest,
-    ) = issusService.edit(authUser.userId, id, issusRequest);
+            @RequestBody issusRequest: IssueRequest,
+    ) = issueService.edit(authUser.userId, id, issusRequest);
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(
             authUser: AuthUser,
             @PathVariable id: Long
-    ) = issusService.delete(id)
+    ) = issueService.delete(id)
 }
