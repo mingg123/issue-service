@@ -1,6 +1,7 @@
 package com.issusService.model
 
 import com.fasterxml.jackson.annotation.JsonFormat
+import com.issusService.domain.Comment
 import com.issusService.domain.Issue
 import com.issusService.domain.enums.IssuePriority
 import com.issusService.domain.enums.IssueStatus
@@ -9,6 +10,7 @@ import java.time.LocalDateTime
 
 data class IssueResponse(
         val id: Long,
+        val comments: List<CommentResponse> = emptyList(),
         val summary: String,
         val description: String,
         val userId: Long,
@@ -24,6 +26,7 @@ data class IssueResponse(
         operator fun invoke(issue: Issue) = with(issue) {
             IssueResponse(
                     id = id!!,
+                    comments = comments.sortedByDescending(Comment::id).map(Comment::toResponse),
                     summary = summary,
                     description = description,
                     userId = userId,
